@@ -1,3 +1,7 @@
 tasks:
   - init: npm install && npm run build
     command: npm run start
+
+vscode:
+  extensions:
+    - octref.vetur@0.33.1:NVNh2kUS0Xcu5Lz2UB9CtQ==
