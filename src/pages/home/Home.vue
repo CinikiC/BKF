@@ -1,18 +1,19 @@
 <template>
   <div>
-    <h1>{{msg}}</h1>
+    <navbar></navbar>
     <products></products>
   </div>
 </template>
 
 <script>
+import Navbar from '../../components/Navbar.vue'
 import Products from './Products.vue'
 export default {
-  components: { Products },
+  components: { Products, Navbar },
   name: 'Home',
   data () {
     return {
-      msg: 'This is home page.'
+
     }
   }
 }

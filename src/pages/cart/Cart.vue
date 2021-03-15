@@ -1,13 +1,16 @@
 <template>
-  <h1>{{msg}}</h1>
+  <navbar></navbar>
 </template>
 
 <script>
+import Navbar from "../../components/Navbar.vue"
+
 export default {
+  components: { Navbar },
   name: 'Cart',
   data () {
     return {
-      msg: 'This is cart page.'
+
     }
   }
 }

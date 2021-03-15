@@ -1,36 +1,15 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <nav>
-      <div class="container">
-        <ul class="nav_left">
-          <li>
-            <router-link to="/">Home</router-link>
-          </li>
-          <li>
-            <router-link to="/login">Login</router-link>
-          </li>
-          <li>
-            <router-link to="/register">Register</router-link>
-          </li>
-          <li>
-            <router-link to="/cart">Cart</router-link>
-          </li>
-          <li>
-            <router-link to="/user">User</router-link>
-          </li>
-        </ul>
-      </div>
-    </nav>
-    <router-view/>
-    <div class="p-3 bg-green-500 text-white">Hello Tailwind CSS</div>
-  </div>
 
+    <router-view/>
+  </div>
 </template>
 
 <script>
+import Navbar from './components/Navbar.vue'
 export default {
-  name: 'App'
+  name: 'App',
+  components: { Navbar }
 }
 </script>
 
