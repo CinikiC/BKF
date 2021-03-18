@@ -5,3 +5,4 @@ tasks:
 vscode:
   extensions:
     - octref.vetur@0.33.1:NVNh2kUS0Xcu5Lz2UB9CtQ==
+    - bradlc.vscode-tailwindcss@0.5.9:yRBWziGXnf16R7jUzlgn5w==
