@@ -7,6 +7,8 @@ import Register from '@/pages/register/Register'
 import User from '@/pages/user/User'
 import Cart from '@/pages/cart/Cart'
 import ProductsDetail from '@/pages/home/ProductsDetail'
+import UserInfo from '@/pages/user/UserInfo.vue'
+import UserAddress from '@/pages/user/UserAddress.vue'
 
 Vue.use(Router)
 
@@ -30,7 +32,20 @@ export default new Router({
     {
       path: '/user',
       name: 'User',
-      component: User
+      component: User,
+      redirect: '/user/info',
+      children: [
+        {
+          path: 'info',
+          name: 'UserInfo',
+          component: UserInfo
+        },
+        {
+          path: 'address',
+          name: 'UserAddress',
+          component: UserAddress
+        }
+      ]
     },
     {
       path: '/cart',

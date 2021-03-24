@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
+  <div class="w-full max-w-sm mx-auto overflow-hidden rounded-lg dark:bg-gray-800">
         <div class="px-6 py-4">
             <h2 @click="toHome" class="text-3xl font-bold text-center text-gray-700 dark:text-white">Brand</h2>
 

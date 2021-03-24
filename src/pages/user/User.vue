@@ -1,29 +1,15 @@
 <template>
-  <div class="flex flex-col antialiased">
-    <div class="flex flex-col">
-      <ul class="flex flex-col gap-3">
-        <li class="tracking-wide">
-          Menu 01
-        </li>
-        <li>
-          Menu 01
-        </li>
-        <li>
-          Menu 01
-        </li>
-        <li>
-          Menu 01
-        </li>
-        <li>
-          Menu 01
-        </li>
-      </ul>
-    </div>
-  </div>
+  <section class="place-items-start justify-start grid grid-flow-col">
+    <user-nav></user-nav>
+    <router-view></router-view>
+  </section>
 </template>
 
 <script>
+import UserInfo from './UserInfo.vue'
+import UserNav from './UserNav.vue'
 export default {
+  components: { UserNav, UserInfo },
   name: 'User',
   data () {
     return {

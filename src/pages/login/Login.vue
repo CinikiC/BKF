@@ -1,6 +1,6 @@
 <template>
-    <div class="w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
-        <div class="px-6 py-4">
+    <div class="inset-6 w-full h-1/2 max-w-sm mx-auto overflow-hidden rounded-lg dark:bg-gray-800">
+        <div class="px-6 py-4 p-5">
             <h2 @click="toHome" class="text-3xl font-bold text-center text-gray-700 dark:text-white">Brand</h2>
 
             <h3 class="mt-1 text-xl font-medium text-center text-gray-600 dark:text-gray-200">Welcome Back</h3>
@@ -24,13 +24,14 @@
                     </button>
                 </div>
             </form>
+            
         </div>
-
         <div class="flex items-center justify-center py-4 text-center bg-gray-100 dark:bg-gray-700">
-            <span class="text-sm text-gray-600 dark:text-gray-200">Don't have an account? </span>
+              <span class="text-sm text-gray-600 dark:text-gray-200">Don't have an account? </span>
 
-            <a @click="toRegister" class="mx-2 text-sm font-bold text-blue-600 dark:text-blue-400 hover:text-blue-500">Register</a>
-        </div>
+              <a @click="toRegister" class="mx-2 text-sm font-bold text-blue-600 dark:text-blue-400 hover:text-blue-500">Register</a>
+            </div>
+        
     </div>
 </template>
 
