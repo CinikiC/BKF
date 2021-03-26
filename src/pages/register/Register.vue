@@ -9,14 +9,14 @@
 
             <form>
                 <div class="w-full mt-4">
-                    <input class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" type="email" placeholder="Email Address" aria-label="Email Address">
+                    <input v-model="registerForm.username" class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" placeholder="Username" aria-label="Username">
                 </div>
 
                 <div class="w-full mt-4">
-                    <input class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" type="password" placeholder="Password" aria-label="Password">
+                    <input v-model="registerForm.password" class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" type="password" placeholder="Password" aria-label="Password">
                 </div>
 
-                <button class="mt-4 px-4 py-2 leading-5 text-white transition-colors duration-200 transform bg-gray-700 rounded hover:bg-gray-600 focus:outline-none object-position:center" type="button">
+                <button @click="signin" class="mt-4 px-4 py-2 leading-5 text-white transition-colors duration-200 transform bg-gray-700 rounded hover:bg-gray-600 focus:outline-none object-position:center" type="button">
                         Sign in
                 </button>
 
@@ -37,7 +37,10 @@ export default {
   name: 'Register',
   data () {
     return {
-
+      registerForm: {
+        username: '',
+        password: ''
+      }
     }
   },
   methods: {
@@ -50,6 +53,10 @@ export default {
       router.push({
         path: "/login"
       })
+    },
+    signin: function () {
+      console.log(this.registerForm.username)
+      console.log(this.registerForm.password)
     }
   }
 }

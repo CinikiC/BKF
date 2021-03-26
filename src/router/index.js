@@ -9,6 +9,7 @@ import Cart from '@/pages/cart/Cart'
 import ProductsDetail from '@/pages/home/ProductsDetail'
 import UserInfo from '@/pages/user/UserInfo.vue'
 import UserAddress from '@/pages/user/UserAddress.vue'
+import UserOrder from '@/pages/user/UserOrder.vue'
 
 Vue.use(Router)
 
@@ -44,6 +45,11 @@ export default new Router({
           path: 'address',
           name: 'UserAddress',
           component: UserAddress
+        },
+        {
+          path: 'orders',
+          name: 'UserOrder',
+          component: UserOrder
         }
       ]
     },

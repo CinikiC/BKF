@@ -4,6 +4,7 @@
       <ul class="flex px-12 flex-col gap-4">
         <li @click="toInfo" class="text-base font-semibold hover:text-blue-600">User info</li>
         <li @click="toAddress" class="text-base font-semibold hover:text-blue-600">Address</li>
+        <li @click="toOrders" class="text-base font-semibold hover:text-blue-600">Orders</li>
       </ul>
     </div>
   </div>
@@ -19,6 +20,9 @@ export default {
       },
       toAddress: function () {
         router.push('/user/address')
+      },
+      toOrders: function () {
+        router.push('/user/orders')
       }
     }
 }

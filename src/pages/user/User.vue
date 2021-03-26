@@ -1,5 +1,5 @@
 <template>
-  <section class="place-items-start justify-start grid grid-flow-col">
+  <section class="place-items-centers justify-start grid grid-flow-col">
     <user-nav></user-nav>
     <router-view></router-view>
   </section>
