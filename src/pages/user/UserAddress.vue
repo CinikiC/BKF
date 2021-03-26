@@ -1,12 +1,9 @@
 <template>
-  <div class="mx-auto grid grid-cols-3">
-    
-    <div
-      class="mx-auto mt-3 py-6"
-      v-for="(item, index) in addresses"
-      :key="index"
-    >
+  <div class="mx-auto">
+    <div class="mx-auto mt-3 py-6 grid grid-cols-3 gap-4">
       <user-address-slot
+        v-for="(item, index) in addresses"
+        :key="index"
         :address="item"
         v-on:changed="changeAddress($event, index)"
         v-on:deleted="deleteAddress(index)"
@@ -19,77 +16,22 @@
 import UserAddressSlot from "./UserAddressSlot";
 export default {
   components: { UserAddressSlot },
+  computed: {
+    addresses() {
+      return this.$store.state.addresses;
+    },
+  },
   name: "UserAddress",
   data() {
-    return {
-      addresses: [
-        {
-          name: "username",
-          tel: "133-3333-3333",
-          address: "Wuhan",
-          zip: "123456",
-        },
-        {
-          name: "username1",
-          tel: "131-2222-3343",
-          address: "Hubei",
-          zip: "33333",
-        },
-        {
-          name: "username1",
-          tel: "131-2222-3533",
-          address: "Hubei",
-          zip: "33333",
-        },
-        {
-          name: "username1",
-          tel: "131-2222-3363",
-          address: "Hubei",
-          zip: "33333",
-        },
-        {
-          name: "username1",
-          tel: "131-2222-3363",
-          address: "Hubei",
-          zip: "33333",
-        },
-        {
-          name: "username1",
-          tel: "131-2222-3363",
-          address: "Hubei",
-          zip: "33333",
-        },
-        {
-          name: "username1",
-          tel: "131-2222-3363",
-          address: "Hubei",
-          zip: "33333",
-        },
-        {
-          name: "username1",
-          tel: "131-2222-3363",
-          address: "Hubei",
-          zip: "33333",
-        },
-        {
-          name: "username1",
-          tel: "131-2222-3363",
-          address: "Hubei",
-          zip: "33333",
-        },
-        {
-          name: "deletethis",
-          tel: "131-2222-3363",
-          address: "Hubei",
-          zip: "33333",
-        },
-      ],
-    };
+    return {};
   },
   methods: {
-    changeAddress: function (address, index) {
-      console.log("changeindex" + index);
-      this.addresses[index] = address;
+    changeAddress: function (newAddress, editIndex) {
+      console.log("changeindex" + editIndex);
+      this.$store.commit("USER_EDIT_ADDRESS", {
+        index: editIndex,
+        address: newAddress,
+      });
       this.$forceUpdate();
     },
     deleteAddress: function (index) {

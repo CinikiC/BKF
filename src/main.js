@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import './assets/styles.css'
 import VueTailwind from 'vue-tailwind'
+import store from './store'
 import {
   TTable, TDialog, TModal, TInput, TCheckbox, TAlert, TTag
 } from 'vue-tailwind/dist/components'
@@ -148,6 +149,7 @@ Vue.use(VueTailwind, settings)
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })
