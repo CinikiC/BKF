@@ -22,9 +22,9 @@
         >
           <td :class="props.tdClass">
             <t-checkbox
-              checked
-              v-bind:value="props.row.Price * props.row.Number"
+              v-bind:value="props.row.OrderNo"
               v-model="sum"
+              @change="check(props.rowIndex)"
             />
           </td>
           <td :class="props.tdClass">
@@ -69,7 +69,8 @@
         <tfoot :class="props.tfootClass">
           <tr :class="[props.trClass, 'bg-gray-200']">
             <td :class="props.tdClass">
-              <t-checkbox v-model="allChecked" @change="checkAll" />
+              <button v-if="allChecked===false" @click="checkAll" class="w-3/4 text-center font-bold text-white uppercase transition-colors duration-200 transform bg-red-800 rounded dark:bg-gray-700 hover:bg-red-600 dark:hover:bg-red-600 focus:outline-none focus:bg-red-700 dark:focus:bg-red-600">SELECT ALL</button>
+              <button v-else @click="checkAll" class="w-3/4 text-center font-bold text-white uppercase transition-colors duration-200 transform bg-red-800 rounded dark:bg-gray-700 hover:bg-red-600 dark:hover:bg-red-600 focus:outline-none focus:bg-red-700 dark:focus:bg-red-600">RESET</button>
             </td>
             <td colspan="3" :class="[props.tdClass, 'text-right']">
               <strong>Total:</strong>
@@ -80,6 +81,7 @@
             <td colspan="4" :class="props.tdClass">
               <button
                 class="w-3/4 text-center font-bold text-white uppercase transition-colors duration-200 transform bg-gray-800 rounded dark:bg-gray-700 hover:bg-gray-600 dark:hover:bg-red-600 focus:outline-none focus:bg-gray-700 dark:focus:bg-gray-600"
+                @click="checkOut"
               >
                 Check Out
               </button>
@@ -115,73 +117,85 @@
 </template>
 
 <script>
-import Vue from "vue";
+import router from '../../router'
 export default {
   name: "Cart",
   data() {
     return {
       sum: [],
-      cart: [
-        {
-          OrderNo: "00001",
-          Product: "P1",
-          Price: 27,
-          Number: "3",
-        },
-        {
-          OrderNo: "00002",
-          Product: "P3",
-          Price: 20,
-          Number: "1",
-        },
-      ],
-      allChecked: false,
-      allCheckArr: [],
     };
   },
   computed: {
     total: function () {
-      return eval(this.sum.join("+"));
+      let amount = 0;
+      for (let index = 0; index < this.cart.length; index++) {
+        if (this.cart[index].Checked === true) {
+          amount = amount + this.cart[index].Price * this.cart[index].Number;
+        }
+      }
+      return amount;
+    },
+    cart() {
+      return this.$store.state.cart;
+    },
+    allChecked: function () {
+      if (this.sum.length === this.cart.length) {
+        return true;
+      } else {
+        return false;
+      }
     },
   },
-  mounted() {
-    console.log("mounted.");
-    for (var index in this.cart) {
-      this.allCheckArr.push(this.cart[index].Price * this.cart[index].Number);
-      console.log(this.allCheckArr[index]);
-    }
-  },
-  updated() {
-    console.log("updated.");
-    this.allCheckArr = [];
-    this.sum = [];
-    for (var index in this.cart) {
-      this.allCheckArr.push(this.cart[index].Price * this.cart[index].Number);
-      console.log(this.allCheckArr[index]);
-    }
-  },
   methods: {
+    check(index) {
+      this.$store.commit("CART_CHECK", index);
+      
+    },
     checkAll: function () {
-      if (!this.allChecked) {
+      if (this.allChecked === true) {
+        
+        this.$store.commit("CART_RESET_ALL_CHECKS");
         this.sum = [];
       } else {
-        this.sum = this.allCheckArr;
+        
+        this.$store.commit("CART_CHECK_ALL");
+        this.sum=[]
+        for (let index = 0; index < this.cart.length; index++) {
+          this.sum.push(index+1);
+        }
+        
       }
     },
     addNumber(index) {
-      this.cart[index].Number++;
-      console.log(this.cart[index]);
-      this.$forceUpdate();
+      this.$store.commit("CART_ADD", index);
     },
     decNumber(index) {
-      this.cart[index].Number--;
-      this.$forceUpdate();
+      this.$store.commit("CART_DEC", index);
     },
     deleteOrder(index) {
-      this.cart.splice(index, 1);
+      this.$store.commit("CART_DELETE", index);
       this.$modal.hide("delete");
-      this.$forceUpdate();
+    },
+    checkOut() {
+      for (let index = 0; index < this.cart.length; index++) {
+        if (this.cart[index].Checked === true) {
+          this.$store.commit("USER_CREATE_ORDER", this.cart[index]);
+        }
+      }
+      for (let index = 0; index < this.cart.length; index++) {
+        if (this.cart[index].Checked === true) {
+          console.log(index)
+          this.$store.commit("CART_DELETE", index);
+          index--
+        }
+      }
     },
   },
+  mounted() {
+      if(JSON.stringify(this.$store.state.user)==='{}'){
+        alert('Please login first')
+        router.push('/login')
+      }
+  }
 };
 </script>

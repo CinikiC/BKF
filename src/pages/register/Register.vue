@@ -55,8 +55,9 @@ export default {
       })
     },
     signin: function () {
-      console.log(this.registerForm.username)
-      console.log(this.registerForm.password)
+      this.$store.dispatch('USER_REGISTER', this.registerForm).then(router.push("/")).catch(()=>{
+        alert('Register failed')
+      })
     }
   }
 }

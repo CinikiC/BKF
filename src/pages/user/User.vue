@@ -8,6 +8,7 @@
 <script>
 import UserInfo from './UserInfo.vue'
 import UserNav from './UserNav.vue'
+import router from '../../router'
 export default {
   components: { UserNav, UserInfo },
   name: 'User',
@@ -15,6 +16,12 @@ export default {
     return {
       msg: 'This is user page.'
     }
+  },
+  mounted() {
+      if(JSON.stringify(this.$store.state.user)==='{}'){
+        alert('Please login first')
+        router.push('/login')
+      }
   }
 }
 </script>

@@ -40,48 +40,20 @@ export default {
   name: "UserOrder",
   data() {
     return {
-      orders: [
-        {
-          orderID: "0001",
-          product: "P1",
-          price: "350",
-          status: "Finished",
-        },
-        {
-          orderID: "0002",
-          product: "P3",
-          price: "50",
-          status: "Finished",
-        },
-        {
-          orderID: "0003",
-          product: "P5",
-          price: "650",
-          status: "Finished",
-        },
-        {
-          orderID: "0004",
-          product: "P7",
-          price: "250",
-          status: "Delivering",
-        },
-        {
-          orderID: "0005",
-          product: "P9",
-          price: "350",
-          status: "Delivering",
-        },
-      ],
+      
     };
+  },
+  computed: {
+    orders() {
+      return this.$store.state.orders
+    }
   },
   methods: {
     returned: function (index) {
-      this.orders[index].status='Returned'
-      this.$forceUpdate()
+      this.$store.commit('USER_RETURN_ORDER', index)
     },
     cancel: function (index) {
-      this.orders[index].status='Cancelled'
-      this.$forceUpdate()
+      this.$store.commit('USER_CANCEL_ORDER', index)
     }
   }
 };

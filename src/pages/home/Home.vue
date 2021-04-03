@@ -6,6 +6,7 @@
 
 <script>
 import Navbar from '../../components/Navbar.vue'
+import router from '../../router'
 import Products from './Products.vue'
 export default {
   components: { Products, Navbar },
@@ -14,6 +15,12 @@ export default {
     return {
 
     }
+  },
+  mounted() {
+      if(JSON.stringify(this.$store.state.user)==='{}'){
+        alert('Please login first')
+        router.push('/login')
+      }
   }
 }
 </script>

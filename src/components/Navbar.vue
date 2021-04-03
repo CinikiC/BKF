@@ -25,6 +25,7 @@
                     <router-link to="/register" class="px-2 py-1 text-sm font-medium text-gray-700 transition-colors duration-200 transform rounded dark:text-gray-200 hover:bg-gray-900 hover:text-gray-100 md:mx-2">Register</router-link>
                     <router-link to="/user" class="px-2 py-1 text-sm font-medium text-gray-700 transition-colors duration-200 transform rounded dark:text-gray-200 hover:bg-gray-900 hover:text-gray-100 md:mx-2">User</router-link>
                     <router-link to="/cart" class="px-2 py-1 text-sm font-medium text-gray-700 transition-colors duration-200 transform rounded dark:text-gray-200 hover:bg-gray-900 hover:text-gray-100 md:mx-2">Cart</router-link>
+                    <p @click="logout" class="px-2 py-1 text-sm font-medium text-gray-700 transition-colors duration-200 transform rounded dark:text-gray-200 hover:bg-gray-900 hover:text-gray-100 md:mx-2">Logout</p>
                 </div>
 
                 <div class="relative">
@@ -40,3 +41,17 @@
         </div>
     </nav>
 </template>
+
+<script>
+import router from '../router'
+export default {
+    name: 'Navbar',
+    methods: {
+        logout: function () {
+            this.$store.dispatch('USER_LOGOUT').then(router.push("/login")).catch(()=>{
+                alert('Logout failed')
+            })
+        }
+    }
+}
+</script>

@@ -109,10 +109,6 @@ export default {
   name: "UserInfo",
   data() {
     return {
-      user: {
-        username: "Jane",
-        password: "123456",
-      },
       userNewname: "",
       userNewpassword: "",
       editUsernameAlert: false,
@@ -121,22 +117,39 @@ export default {
       auth: "",
     };
   },
+  computed: {
+    user() {
+      return this.$store.state.user;
+    },
+  },
   methods: {
     editUsername: function () {
-      this.user.username = this.userNewname;
-      this.userNewname = "";
-      this.editUsernameAlert = true;
-      this.$forceUpdate();
+      const self = this;
+      this.$store
+        .dispatch("USER_CHANGE_USERNAME", this.userNewname)
+        .then(() => {
+          self.userNewname = "";
+          self.editUsernameAlert = true;
+        })
+        .catch(() => {
+          alert("Change username failed");
+        });
     },
     editPassword: function () {
+      const self = this;
       if (this.auth === this.user.password) {
-        this.user.password = this.userNewpassword;
-        this.userNewpassword = "";
-        this.editPasswordAlert = true;
-        this.auth = "";
-        this.$modal.hide("password");
-        this.$forceUpdate();
-        this.retypeNotmatch = false;
+        this.$store
+          .dispatch("USER_CHANGE_PASSWORD", this.userNewpassword)
+          .then(() => {
+            self.userNewpassword = "";
+            self.editPasswordAlert = true;
+            self.auth = "";
+            self.$modal.hide("password");
+            self.retypeNotmatch = false;
+          })
+          .catch(() => {
+            alert("Change password failed");
+          });
       } else {
         this.retypeNotmatch = true;
       }

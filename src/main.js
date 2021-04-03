@@ -7,7 +7,7 @@ import './assets/styles.css'
 import VueTailwind from 'vue-tailwind'
 import store from './store'
 import {
-  TTable, TDialog, TModal, TInput, TCheckbox, TAlert, TTag
+  TTable, TDialog, TModal, TInput, TCheckbox, TAlert, TTag, TSelect
 } from 'vue-tailwind/dist/components'
 
 const settings = {
@@ -40,7 +40,7 @@ const settings = {
     props: {
       fixedClasses: {
         overlay: 'overflow-auto scrolling-touch left-0 top-0 bottom-0 right-0 w-full h-full fixed bg-transparent',
-        wrapper: 'relative mx-auto z-50 w-1/3 px-3 py-40',
+        wrapper: 'relative mx-auto z-50 w-full px-3 py-40',
         modal: 'overflow-visible relative shadow-lg rounded',
         body: 'p-3',
         header: 'border-b p-3 rounded-t font-bold',
@@ -84,7 +84,10 @@ const settings = {
     component: TDialog
   },
   't-input': {
-    component: TInput
+    component: TInput,
+    props: {
+      fixedClasses: 'w-10'
+    }
   },
   't-checkbox': {
     component: TCheckbox,
@@ -137,6 +140,17 @@ const settings = {
         error: 'text-red-500',
         badge: 'inline-flex items-center px-3 rounded-full text-xs font-medium leading-4 bg-gray-100 text-gray-800',
         avatar: 'inline-flex items-center justify-center h-10 w-10 rounded-full bg-gray-500 overflow-hidden leading-none text-center'
+      }
+    }
+  },
+  't-select': {
+    component: TSelect,
+    props: {
+      fixedClasses: 'block w-full pl-3 pr-10 py-2 transition duration-100 ease-in-out border rounded shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed',
+      classes: 'text-black placeholder-gray-400 bg-white border-gray-300 focus:border-blue-500 ',
+      variants: {
+        danger: 'border-red-300 bg-red-50 placeholder-red-200 text-red-900',
+        success: 'border-green-300 bg-green-50 placeholder-gray-400 text-green-900'
       }
     }
   }
