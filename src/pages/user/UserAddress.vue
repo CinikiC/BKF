@@ -49,6 +49,9 @@ export default {
       addModal: false
     };
   },
+  mounted() {
+    this.$store.dispatch('USER_GET_ADDRESSES')
+  },
   methods: {
     changeAddress: function (newAddress) {
       console.log("changeindex" + this.$store.state.processingAddressIndex);

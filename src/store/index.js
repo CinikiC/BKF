@@ -348,16 +348,29 @@ export default new Vuex.Store({
                 })
             })
         },
-        USER_ADD_ADDRESS(context, payload){
+        USER_ADD_ADDRESS(context, payload) {
             return new Promise((resolve, reject) => {
                 const postPayload = {
                     userID: context.state.user._id,
                     newAddress: payload
                 }
-                axios.post('/user/addaddress', postPayload).then((res)=>{
-                    context.commit('USER_ADD_ADDRESS', payload)
+                axios.post('/user/addaddress', postPayload).then((res) => {
                     resolve(res)
-                }).catch((err)=>{
+                }).catch((err) => {
+                    reject(err)
+                })
+            })
+        },
+        USER_GET_ADDRESSES(context) {
+            return new Promise((resolve, reject) => {
+                console.log(context.state.user._id)
+                axios.post('/user/addresses', context.state.user._id).then((res) => {
+                    console.log('resolve: ')
+                    for (let index = 0; index < res.length; index++) {
+                        context.commit("USER_ADD_ADDRESS", res[index])
+                    }
+                    resolve(res)
+                }).catch((err) => {
                     reject(err)
                 })
             })
